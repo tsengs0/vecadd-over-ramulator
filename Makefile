@@ -16,7 +16,10 @@ CXX := g++
  
 CFLAGS = -O0 -std=c++11 -g -Wall -pedantic -Wno-long-long \
 		 -DSC_INCLUDE_DYNAMIC_PROCESSES -fpermissive \
-		 -I$(SYSTEMC_INC_DIR) 
+		 -I$(SYSTEMC_INC_DIR) \
+		-L/usr/local/systemc-2.3.1/lib-linux64 \
+		-Wl,-rpath=/usr/local/systemc-2.3.1/lib-linux64 \
+		-lsystemc -lm -pg
 
 LDFLAGS =-L$(SYSTEMC_LIB_DIR) -lsystemc -lm
 
@@ -29,6 +32,7 @@ all: depend ramulator
 clean:
 	rm -f ramulator
 	rm -rf $(OBJDIR)
+	rm *.vcd
 
 depend: $(OBJDIR)/.depend
 
