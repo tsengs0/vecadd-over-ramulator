@@ -107,7 +107,44 @@ int sc_main(int argc, char *argv[]){
     writeVec.writeBurstResp(writeResp);
     writeVec.sigInit();
 
+    // Opening .VCD file
+    sc_trace_file *waveform;
+    waveform = sc_create_vcd_trace_file("ramulator_waveform");
+
+    // Dumping the desired signals
+    sc_trace(waveform, readReq0, "readReq0");
+    sc_trace(waveform, readReq1, "readReq1");
+    sc_trace(waveform, writeReq, "writeReq"); 
+    sc_trace(waveform, readResp0, "readResp0");    
+    sc_trace(waveform, readResp1, "readResp1");   
+    sc_trace(waveform, writeResp, "writeResp"); 
+
+    sc_trace(waveform, readEna0, "readEna0");
+    sc_trace(waveform, readEna1, "readEna1");
+    sc_trace(waveform, writeEna, "writeEna");
+    sc_trace(waveform, readAddr0, "readAddr0");
+    sc_trace(waveform, readAddr1, "readAddr1");
+    sc_trace(waveform, writeAddr, "writeAddr");
+    sc_trace(waveform, readLength0, "readLength0");
+    sc_trace(waveform, readLength1, "readLength1");
+    sc_trace(waveform, writeLength, "writeLength");
+
+    sc_trace(waveform, readComplete0, "readComplete0");
+    sc_trace(waveform, readComplete1, "readComplete1");
+    sc_trace(waveform, writeComplete, "writeComplete");
+    sc_trace(waveform, computeDone, "computeDone");
+
+    sc_trace(waveform, readData0, "readData0");
+    sc_trace(waveform, readData1, "readData1");
+    sc_trace(waveform, writeData, "writeData");
+    sc_trace(waveform, readValid0, "readValid0");
+    sc_trace(waveform, readValid1, "readValid1");
+    
     sc_start();
+    
+
+    sc_close_vcd_trace_file(waveform);
+    //sc_stop();
 
     return 0;
 
